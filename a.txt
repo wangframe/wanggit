@@ -1,0 +1,186 @@
+-- MySQL dump 10.11
+--
+-- Host: localhost    Database: aaa
+-- ------------------------------------------------------
+-- Server version	5.0.41-community-nt
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `account`
+--
+
+DROP TABLE IF EXISTS `account`;
+CREATE TABLE `account` (
+  `acct_num` int(11) default NULL,
+  `amount` decimal(10,2) default NULL
+) ENGINE=InnoDB DEFAULT CHARSET=gbk;
+
+--
+-- Dumping data for table `account`
+--
+
+LOCK TABLES `account` WRITE;
+/*!40000 ALTER TABLE `account` DISABLE KEYS */;
+INSERT INTO `account` VALUES (137,'14.98'),(141,'1937.50'),(97,'-100.00');
+/*!40000 ALTER TABLE `account` ENABLE KEYS */;
+UNLOCK TABLES;
+
+/*!50003 SET @OLD_SQL_MODE=@@SQL_MODE*/;
+DELIMITER ;;
+/*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" */;;
+/*!50003 CREATE */ /*!50017 DEFINER=`root`@`localhost` */ /*!50003 TRIGGER `ins_sum` BEFORE INSERT ON `account` FOR EACH ROW SET @sum = @sum  + NEW.amount */;;
+
+DELIMITER ;
+/*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE */;
+
+--
+-- Table structure for table `student`
+--
+
+DROP TABLE IF EXISTS `student`;
+CREATE TABLE `student` (
+  `id` int(10) NOT NULL default '0',
+  `name` varchar(30) default NULL,
+  `sex` varchar(2) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=gbk;
+
+--
+-- Dumping data for table `student`
+--
+
+LOCK TABLES `student` WRITE;
+/*!40000 ALTER TABLE `student` DISABLE KEYS */;
+/*!40000 ALTER TABLE `student` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `test1`
+--
+
+DROP TABLE IF EXISTS `test1`;
+CREATE TABLE `test1` (
+  `a1` int(11) default NULL
+) ENGINE=InnoDB DEFAULT CHARSET=gbk;
+
+--
+-- Dumping data for table `test1`
+--
+
+LOCK TABLES `test1` WRITE;
+/*!40000 ALTER TABLE `test1` DISABLE KEYS */;
+INSERT INTO `test1` VALUES (1),(3),(1),(7),(1),(8),(4),(4);
+/*!40000 ALTER TABLE `test1` ENABLE KEYS */;
+UNLOCK TABLES;
+
+/*!50003 SET @OLD_SQL_MODE=@@SQL_MODE*/;
+DELIMITER ;;
+/*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" */;;
+/*!50003 CREATE */ /*!50017 DEFINER=`root`@`localhost` */ /*!50003 TRIGGER `testref` BEFORE INSERT ON `test1` FOR EACH ROW BEGIN
+	INSERT INTO test2 SET a2 = NEW.a1;
+	DELETE FROM test3 WHERE a3 = NEW.a1;
+	UPDATE test4 SET b4 = b4 + 1 WHERE a4 = NEW.a1;
+	END */;;
+
+DELIMITER ;
+/*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE */;
+
+--
+-- Table structure for table `test2`
+--
+
+DROP TABLE IF EXISTS `test2`;
+CREATE TABLE `test2` (
+  `a2` int(11) default NULL
+) ENGINE=InnoDB DEFAULT CHARSET=gbk;
+
+--
+-- Dumping data for table `test2`
+--
+
+LOCK TABLES `test2` WRITE;
+/*!40000 ALTER TABLE `test2` DISABLE KEYS */;
+INSERT INTO `test2` VALUES (1),(3),(1),(7),(1),(8),(4),(4);
+/*!40000 ALTER TABLE `test2` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `test3`
+--
+
+DROP TABLE IF EXISTS `test3`;
+CREATE TABLE `test3` (
+  `a3` int(11) NOT NULL auto_increment,
+  PRIMARY KEY  (`a3`)
+) ENGINE=InnoDB DEFAULT CHARSET=gbk;
+
+--
+-- Dumping data for table `test3`
+--
+
+LOCK TABLES `test3` WRITE;
+/*!40000 ALTER TABLE `test3` DISABLE KEYS */;
+INSERT INTO `test3` VALUES (2),(5),(6),(9),(10);
+/*!40000 ALTER TABLE `test3` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `test4`
+--
+
+DROP TABLE IF EXISTS `test4`;
+CREATE TABLE `test4` (
+  `a4` int(11) NOT NULL auto_increment,
+  `b4` int(11) default '0',
+  PRIMARY KEY  (`a4`)
+) ENGINE=InnoDB DEFAULT CHARSET=gbk;
+
+--
+-- Dumping data for table `test4`
+--
+
+LOCK TABLES `test4` WRITE;
+/*!40000 ALTER TABLE `test4` DISABLE KEYS */;
+INSERT INTO `test4` VALUES (1,3),(2,0),(3,1),(4,2),(5,0),(6,0),(7,1),(8,1),(9,0),(10,0),(11,0);
+/*!40000 ALTER TABLE `test4` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tmp`
+--
+
+DROP TABLE IF EXISTS `tmp`;
+CREATE TABLE `tmp` (
+  `test` varbinary(12) NOT NULL default ''
+) ENGINE=InnoDB DEFAULT CHARSET=gbk;
+
+--
+-- Dumping data for table `tmp`
+--
+
+LOCK TABLES `tmp` WRITE;
+/*!40000 ALTER TABLE `tmp` DISABLE KEYS */;
+INSERT INTO `tmp` VALUES ('1');
+/*!40000 ALTER TABLE `tmp` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2012-10-25 10:17:06
