@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `account`;
 CREATE TABLE `account` (
   `acct_num` int(11) default NULL,
   `amount` decimal(10,2) default NULL
-) ENGINE=InnoDB DEFAULT CHARSET=gbk;
+) ENGINE=InnoDB DEFAULT CHARSET=gbk;fgsfdgsfgsdfg
 
 --
 -- Dumping data for table `account`
